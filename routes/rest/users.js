@@ -3,7 +3,11 @@ const router = express.Router();
 
 const { check } = require('express-validator');
 
-const { registerUser, loginUser } = require('../../controllers/users');
+// Controllers
+const { registerUser, loginUser, getSelf } = require('../../controllers/users');
+
+// Middlewares
+const auth = require('../../middleware/auth');
 
 router.post(
   '/',
@@ -24,5 +28,7 @@ router.post(
   ],
   loginUser
 );
+
+router.get('/self', auth, getSelf);
 
 module.exports = router;

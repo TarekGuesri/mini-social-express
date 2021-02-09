@@ -79,3 +79,20 @@ exports.loginUser = async (req, res, next) => {
     return res.json({ token });
   });
 };
+
+// @route GET users/self
+// @desc Gets logged in user info
+// @access Private
+exports.getSelf = async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: { id: req.user.id },
+    });
+    if (!user) return res.status(404).json({ msg: 'User not found' });
+
+    return res.json(user);
+  } catch (error) {
+    ErrorLogger(req, 1, error);
+    return res.status(500).send({ msg: 'Erreur du serveur' });
+  }
+};
