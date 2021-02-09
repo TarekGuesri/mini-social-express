@@ -13,4 +13,9 @@ app.use(cors());
 
 app.get('/', (req, res) => res.send('Hello from M-Social backend!'));
 
+// Routing
+app.use('/rest', require('./routes/rest'));
+
+app.get('*', (req, res) => res.send('Endpoint Not Found!'));
+
 app.listen(port, () => console.log(`App listening on port ${port}!`));
