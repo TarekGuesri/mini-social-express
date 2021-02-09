@@ -5,6 +5,19 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5000;
 
+const db = require('./config/db');
+
+// Test DB
+db.authenticate()
+  .then(async () => {
+    console.log('Connected');
+
+    require('./dbInit');
+  })
+  .catch((err) => {
+    console.error(err.message);
+  });
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
