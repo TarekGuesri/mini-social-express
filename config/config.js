@@ -4,5 +4,6 @@ module.exports = {
   database: 'mini-social',
   host: 'localhost',
   dialect: 'mysql',
+  jwtSecret: 'mini-social-secret',
   // seederStorage: 'sequelize',
 };
