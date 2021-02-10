@@ -23,18 +23,28 @@ exports.registerUser = async (req, res, next) => {
   const sameUsername = await User.findOne({ where: { username } });
   if (sameUsername) {
     return res.status(400).json({
-      msg: "Il y a déjà un utilisateur avec ce nom d'utilisateur",
+      msg: 'There is already a user with this username',
     });
   }
 
   try {
-    await User.create({
+    const user = await User.create({
       username,
       password: await User.hashPassword(password),
       role: USER,
     });
 
-    res.json({ msg: 'User created successfully' });
+    const payload = {
+      user: {
+        id: user.id,
+        // role: ADMIN,
+      },
+    };
+
+    jwt.sign(payload, jwtSecret, (err, token) => {
+      if (err) throw err;
+      return res.json({ token });
+    });
   } catch (error) {
     ErrorLogger(req, 1, error);
     return res.status(500).send({ msg: 'Server Error!' });
@@ -70,7 +80,7 @@ exports.loginUser = async (req, res, next) => {
   const payload = {
     user: {
       id: user.id,
-      role: ADMIN,
+      // role: ADMIN,
     },
   };
 
