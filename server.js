@@ -30,7 +30,7 @@ app.use(cors());
 app.get('/', (req, res) => res.send('Hello from M-Social backend!'));
 
 // Routing
-app.use('/rest', loadingSimulator(1000), require('./routes/rest'));
+app.use('/rest', loadingSimulator(0), require('./routes/rest'));
 
 app.get('*', (req, res) => res.send('Endpoint Not Found!'));
 
