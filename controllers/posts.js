@@ -38,3 +38,19 @@ exports.createPost = async (req, res, next) => {
 
   res.json({ msg: 'Post Created!' });
 };
+
+// @route GET /rest/posts/:id
+// @desc  Get post by ID
+// @access  Public
+exports.getPost = async (req, res, next) => {
+  const post = await Post.findOne({
+    where: { id: req.params.id },
+    include: [{ model: User }],
+  });
+
+  if (!post) {
+    return res.status(404).json({ msg: 'Post not found!' });
+  }
+
+  res.json(post);
+};

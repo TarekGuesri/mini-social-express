@@ -4,7 +4,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 
 // Controllers
-const { getPosts, createPost } = require('../../controllers/posts');
+const { getPosts, getPost, createPost } = require('../../controllers/posts');
 
 // Middlewares
 const auth = require('../../middleware/auth');
@@ -22,5 +22,7 @@ router.post(
   ],
   createPost
 );
+
+router.get('/:id', getPost);
 
 module.exports = router;
