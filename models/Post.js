@@ -15,11 +15,7 @@ const Post = db.define(
     },
     imgUrl: {
       type: Sequelize.STRING,
-      allowNull: false,
-    },
-    role: {
-      type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     // The id of the poster
     user_id: {
