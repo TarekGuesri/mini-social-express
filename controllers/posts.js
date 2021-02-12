@@ -1,9 +1,6 @@
 const { validationResult } = require('express-validator');
 
 const ErrorLogger = require('../helpers/errorLogger');
-const { USER, ADMIN } = require('../strings/roles');
-const { jwtSecret } = require('../config/config');
-
 const User = require('../models/User');
 const Post = require('../models/Post');
 
