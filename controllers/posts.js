@@ -36,6 +36,19 @@ exports.createPost = async (req, res, next) => {
   res.json({ msg: 'Post Created!' });
 };
 
+// @route GET /rest/posts/latest
+// @desc  Get latest 3 posts
+// @access  Public
+exports.getGetLatestPosts = async (req, res, next) => {
+  const posts = await Post.findAll({
+    order: [['createdAt', 'DESC']],
+    limit: 3,
+    include: [{ model: User }],
+  });
+
+  res.json(posts);
+};
+
 // @route GET /rest/posts/:id
 // @desc  Get post by ID
 // @access  Public

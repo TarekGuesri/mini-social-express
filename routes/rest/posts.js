@@ -4,7 +4,12 @@ const router = express.Router();
 const { check } = require('express-validator');
 
 // Controllers
-const { getPosts, getPost, createPost } = require('../../controllers/posts');
+const {
+  getPosts,
+  getGetLatestPosts,
+  getPost,
+  createPost,
+} = require('../../controllers/posts');
 
 // Middlewares
 const auth = require('../../middleware/auth');
@@ -22,6 +27,8 @@ router.post(
   ],
   createPost
 );
+
+router.get('/latest', getGetLatestPosts);
 
 router.get('/:id', getPost);
 

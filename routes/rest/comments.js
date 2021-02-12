@@ -6,11 +6,14 @@ const { check } = require('express-validator');
 // Controllers
 const {
   getCommentsByPostId,
+  getGetLatestComments,
   addComment,
 } = require('../../controllers/comments');
 
 // Middlewares
 const auth = require('../../middleware/auth');
+
+router.get('/latest', getGetLatestComments);
 
 router.get('/post/:postId', getCommentsByPostId);
 

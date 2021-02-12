@@ -5,6 +5,19 @@ const User = require('../models/User');
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
 
+// @route GET /rest/comments/latest
+// @desc  Get latest 3 comments
+// @access  Public
+exports.getGetLatestComments = async (req, res, next) => {
+  const comments = await Comment.findAll({
+    order: [['createdAt', 'DESC']],
+    limit: 3,
+    include: [{ model: User }],
+  });
+
+  res.json(comments);
+};
+
 // @route GET /rest/comments/post/:postId
 // @desc  Get comments by post id
 // @access  Public
