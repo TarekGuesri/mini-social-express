@@ -12,7 +12,7 @@ exports.getGetLatestComments = async (req, res, next) => {
   const comments = await Comment.findAll({
     order: [['createdAt', 'DESC']],
     limit: 3,
-    include: [{ model: User }],
+    include: [{ model: User }, { model: Post }],
   });
 
   res.json(comments);
@@ -24,6 +24,7 @@ exports.getGetLatestComments = async (req, res, next) => {
 exports.getCommentsByPostId = async (req, res, next) => {
   const comments = await Comment.findAll({
     where: { post_id: req.params.postId },
+    order: [['createdAt', 'DESC']],
     include: [{ model: User }],
   });
 

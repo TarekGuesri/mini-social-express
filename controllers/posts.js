@@ -9,6 +9,7 @@ const Post = require('../models/Post');
 // @access  Public
 exports.getPosts = async (req, res, next) => {
   const posts = await Post.findAll({
+    order: [['createdAt', 'DESC']],
     include: [{ model: User }],
   });
 

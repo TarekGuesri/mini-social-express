@@ -31,6 +31,10 @@ db.sync().then(async () => {
   Comment.belongsTo(User, { foreignKey: 'user_id' });
   User.hasOne(Comment, { foreignKey: 'user_id' });
 
+  // Comment - Post
+  Comment.belongsTo(Post, { foreignKey: 'post_id' });
+  Post.hasOne(Comment, { foreignKey: 'post_id' });
+
   //#endregion Associations
 
   console.log('...DB Init End');
