@@ -3,6 +3,7 @@ const db = require('./config/db');
 
 const User = require('./models/User');
 const Post = require('./models/Post');
+const Comment = require('./models/Comment');
 
 const { ADMIN } = require('./strings/roles');
 
@@ -25,6 +26,10 @@ db.sync().then(async () => {
   // Post - User
   Post.belongsTo(User, { foreignKey: 'user_id' });
   User.hasOne(Post, { foreignKey: 'user_id' });
+
+  // Comment - User
+  Comment.belongsTo(User, { foreignKey: 'user_id' });
+  User.hasOne(Comment, { foreignKey: 'user_id' });
 
   //#endregion Associations
 
